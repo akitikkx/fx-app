@@ -1,4 +1,4 @@
-# fx-app
+# FX App
 
 ## License
 
