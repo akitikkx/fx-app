@@ -1,20 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.converter.ConverterFragment">
 
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_field_amount"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello converter" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_horizontal_standard"
+            android:layout_marginTop="@dimen/margin_vertical_standard"
+            android:layout_marginEnd="@dimen/margin_horizontal_standard"
+            android:hint="@string/converter_amount_input_label"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_base_currency_menu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_horizontal_standard"
+            android:layout_marginTop="@dimen/margin_vertical_standard"
+            android:layout_marginEnd="@dimen/margin_horizontal_standard"
+            app:layout_constraintEnd_toStartOf="@id/text_input_to_currency_menu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_field_amount">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/base_currency_dropdown_label"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_to_currency_menu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_horizontal_standard"
+            android:layout_marginTop="@dimen/margin_vertical_standard"
+            android:layout_marginEnd="@dimen/margin_horizontal_standard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/text_input_base_currency_menu"
+            app:layout_constraintTop_toBottomOf="@id/text_field_amount">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/to_currency_dropdown_label"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_horizontal_standard"
+            android:layout_marginTop="@dimen/margin_vertical_standard"
+            android:layout_marginEnd="@dimen/margin_horizontal_standard"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/padding_double"
+            android:text="@string/converter_button_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_input_base_currency_menu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

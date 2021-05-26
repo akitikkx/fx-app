@@ -5,6 +5,12 @@
     <string name="converter_screen_title">Converter</string>
     <string name="history_screen_title">History</string>
 
+    <!-- Converter screen -->
+    <string name="converter_amount_input_label">Amount</string>
+    <string name="converter_button_label">Get current rate</string>
+    <string name="base_currency_dropdown_label">Select base currency</string>
+    <string name="to_currency_dropdown_label">Select conversion currency</string>
+
     <!-- Bottom navigation -->
     <string name="bottom_navigation_converter_title">Converter</string>
     <string name="bottom_navigation_history_title">History</string>
