@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FX App</string>
+    
+    <!-- Screen Titles -->
+    <string name="converter_screen_title">Converter</string>
+    <string name="history_screen_title">History</string>
+
+    <!-- Bottom navigation -->
+    <string name="bottom_navigation_converter_title">Converter</string>
+    <string name="bottom_navigation_history_title">History</string>
+</resources>

@@ -1,0 +1,2 @@
+rootProject.name = "FX App"
+include ':app'
