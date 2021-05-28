@@ -8,8 +8,12 @@
     <!-- Converter screen -->
     <string name="converter_amount_input_label">Amount</string>
     <string name="converter_button_label">Get current rate</string>
-    <string name="base_currency_dropdown_label">Select base currency</string>
-    <string name="to_currency_dropdown_label">Select conversion currency</string>
+    <string name="base_currency_dropdown_label">From</string>
+    <string name="to_currency_dropdown_label">To</string>
+    <string name="converter_screen_heading">Get the current FX Rate</string>
+    <string name="error_base_currency_required">Base currency required</string>
+    <string name="error_to_currency_required">Conversion currency required</string>
+    <string name="conversion_response">1%1$s = %2$s%3$f</string>
 
     <!-- Bottom navigation -->
     <string name="bottom_navigation_converter_title">Converter</string>

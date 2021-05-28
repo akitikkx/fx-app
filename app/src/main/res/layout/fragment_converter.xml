@@ -5,86 +5,127 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.ahmedtikiwa.fxapp.ui.converter.ConverterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.converter.ConverterFragment">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_field_amount"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ui.converter.ConverterFragment">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_view_heading"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_standard"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                    android:gravity="center_horizontal"
+                    android:text="@string/converter_screen_heading"
+                    android:textAppearance="?attr/textAppearanceHeadline4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_base_currency_menu"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_standard"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                    app:errorEnabled="true"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toStartOf="@id/text_input_to_currency_menu"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_heading">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/autocomplete_base_currency_menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/base_currency_dropdown_label"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_to_currency_menu"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_standard"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                    app:errorEnabled="true"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_input_base_currency_menu"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_heading">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autocomplete_to_currency_menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/to_currency_dropdown_label"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/button_submit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_double"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{() -> viewModel.onGetRateButtonClick()}"
+                    android:padding="@dimen/padding_double"
+                    android:text="@string/converter_button_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_input_base_currency_menu" />
+
+                <TextView
+                    android:id="@+id/text_view_conversion_response"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_double"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/padding_double"
+                    android:textAppearance="?textAppearanceHeadline4"
+                    app:conversion="@{viewModel.conversion}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/button_submit"
+                    tools:text="$1 = R14.89" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_horizontal_standard"
-            android:layout_marginTop="@dimen/margin_vertical_standard"
-            android:layout_marginEnd="@dimen/margin_horizontal_standard"
-            android:hint="@string/converter_amount_input_label"
-            android:textAlignment="center"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_base_currency_menu"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_horizontal_standard"
-            android:layout_marginTop="@dimen/margin_vertical_standard"
-            android:layout_marginEnd="@dimen/margin_horizontal_standard"
-            app:layout_constraintEnd_toStartOf="@id/text_input_to_currency_menu"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_field_amount">
-
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/base_currency_dropdown_label"
-                android:inputType="none" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_to_currency_menu"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_horizontal_standard"
-            android:layout_marginTop="@dimen/margin_vertical_standard"
-            android:layout_marginEnd="@dimen/margin_horizontal_standard"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/text_input_base_currency_menu"
-            app:layout_constraintTop_toBottomOf="@id/text_field_amount">
-
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/to_currency_dropdown_label"
-                android:inputType="none" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/button_submit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_horizontal_standard"
-            android:layout_marginTop="@dimen/margin_vertical_standard"
-            android:layout_marginEnd="@dimen/margin_horizontal_standard"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="@dimen/padding_double"
-            android:text="@string/converter_button_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_input_base_currency_menu" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:showHideView="@{viewModel.isLoading}"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
