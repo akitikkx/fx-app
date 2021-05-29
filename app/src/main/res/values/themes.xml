@@ -15,6 +15,11 @@
         <item name="popupMenuStyle">@style/Widget.FXApp.PopupMenu</item>
         <item name="circularProgressIndicatorStyle">@style/Widget.FXApp.CircularProgressIndicator
         </item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.FXApp.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.FXApp.Subtitle2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.FXApp.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.FXApp.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.FXApp.Headline5</item>
     </style>
 
     <style name="Base.Theme.MaterialTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">

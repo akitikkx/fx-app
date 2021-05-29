@@ -32,6 +32,8 @@ class ConverterViewModel @Inject constructor(
 
     val conversion = repository.conversion
 
+    val error = repository.error
+
     init {
         viewModelScope.launch {
             repository.getConversion(

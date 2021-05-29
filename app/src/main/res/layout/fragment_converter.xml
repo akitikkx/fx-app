@@ -23,7 +23,7 @@
                 android:layout_height="match_parent"
                 tools:context=".ui.converter.ConverterFragment">
 
-                <com.google.android.material.textview.MaterialTextView
+                <TextView
                     android:id="@+id/text_view_heading"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -98,21 +98,48 @@
                     app:layout_constraintTop_toBottomOf="@id/text_input_base_currency_menu" />
 
                 <TextView
+                    android:id="@+id/text_view_response_heading"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_double"
+                    android:gravity="center_horizontal"
+                    android:textAllCaps="true"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/button_submit"
+                    app:showHideView="@{viewModel.conversion != null}"
+                    tools:text="FX Rate" />
+
+                <TextView
                     android:id="@+id/text_view_conversion_response"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_horizontal_standard"
-                    android:layout_marginTop="@dimen/margin_vertical_double"
+                    android:layout_marginTop="@dimen/margin_vertical_standard"
                     android:layout_marginEnd="@dimen/margin_horizontal_standard"
                     android:gravity="center_horizontal"
-                    android:padding="@dimen/padding_double"
-                    android:textAppearance="?textAppearanceHeadline4"
+                    android:padding="@dimen/padding_standard"
+                    android:textAppearance="?attr/textAppearanceHeadline5"
                     app:conversion="@{viewModel.conversion}"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/button_submit"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_response_heading"
                     tools:text="$1 = R14.89" />
+
+                <TextView
+                    android:id="@+id/text_view_response_attribution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_standard"
+                    android:gravity="center_horizontal"
+                    android:text="@string/conversion_response_attribution"
+                    android:textAppearance="?attr/textAppearanceSubtitle2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_conversion_response"
+                    app:showHideView="@{viewModel.conversion != null}" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ahmedtikiwa.fxapp.R
 import com.ahmedtikiwa.fxapp.databinding.FragmentConverterBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -72,11 +73,28 @@ class ConverterFragment : Fragment() {
                 }
 
                 if (baseCurrency.isNotBlank() && toCurrency.isNotBlank()) {
-                    binding.textInputBaseCurrencyMenu.error = null
-                    binding.textInputToCurrencyMenu.error = null
-                    viewModel.onRateQueryReceived(baseCurrency, toCurrency)
-                    viewModel.onRateRequestCompleted()
+                    // check if the currencies are the same
+                    if (baseCurrency == toCurrency) {
+                        binding.textInputBaseCurrencyMenu.error =
+                            getString(R.string.error_currencies_match)
+                        binding.textInputToCurrencyMenu.error =
+                            getString(R.string.error_currencies_match)
+                    } else {
+                        binding.textInputBaseCurrencyMenu.error = null
+                        binding.textInputToCurrencyMenu.error = null
+                        viewModel.onRateQueryReceived(baseCurrency, toCurrency)
+                        viewModel.onRateRequestCompleted()
+                    }
                 }
+            }
+        })
+
+        viewModel.error.observe(viewLifecycleOwner, {
+            if (it.isNotEmpty()) {
+                Snackbar.make(
+                    binding.root,
+                    it, Snackbar.LENGTH_LONG
+                ).show()
             }
         })
     }

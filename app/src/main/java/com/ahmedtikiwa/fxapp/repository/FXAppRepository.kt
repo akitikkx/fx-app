@@ -24,6 +24,9 @@ class FXAppRepository constructor(
     private val _conversion = MutableLiveData<Conversion>()
     val conversion: LiveData<Conversion> = _conversion
 
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
+
     val currencies: LiveData<List<Currency>> = Transformations.map(fxAppDao.getCurrencies()) {
         it.asDomainModel()
     }
@@ -41,6 +44,7 @@ class FXAppRepository constructor(
                 _isLoading.postValue(false)
             } catch (e: Exception) {
                 _isLoading.postValue(false)
+                _error.postValue(e.message)
                 Timber.d(e)
             }
         }
@@ -77,6 +81,7 @@ class FXAppRepository constructor(
                 _isLoading.postValue(false)
             } catch (e: Exception) {
                 _isLoading.postValue(false)
+                _error.postValue(e.message)
                 Timber.d(e)
             }
         }

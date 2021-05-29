@@ -13,7 +13,9 @@
     <string name="converter_screen_heading">Get the current FX Rate</string>
     <string name="error_base_currency_required">Base currency required</string>
     <string name="error_to_currency_required">Conversion currency required</string>
+    <string name="error_currencies_match">Both currencies need to be different</string>
     <string name="conversion_response">1%1$s = %2$s%3$f</string>
+    <string name="conversion_response_attribution">Data provided by FXMarket API</string>
 
     <!-- Bottom navigation -->
     <string name="bottom_navigation_converter_title">Converter</string>
