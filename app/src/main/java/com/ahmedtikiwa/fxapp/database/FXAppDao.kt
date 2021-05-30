@@ -17,4 +17,10 @@ interface FXAppDao {
 
     @Query("select * from currencies")
     fun getCurrencies() : LiveData<List<DatabaseCurrencies>>
+
+    @Query("delete from history")
+    fun deleteAllHistory()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAllHistory(vararg history: DatabaseHistory?)
 }

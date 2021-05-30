@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.ahmedtikiwa.fxapp.database.DatabaseCurrencies
+import com.ahmedtikiwa.fxapp.database.DatabaseHistory
 import com.ahmedtikiwa.fxapp.database.FXAppDao
 import com.ahmedtikiwa.fxapp.database.asDomainModel
 import com.ahmedtikiwa.fxapp.domain.Conversion
@@ -26,6 +27,8 @@ class FXAppRepository constructor(
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
+
+    private var _lastIndex = MutableLiveData<Int>(1)
 
     val currencies: LiveData<List<Currency>> = Transformations.map(fxAppDao.getCurrencies()) {
         it.asDomainModel()
@@ -84,6 +87,45 @@ class FXAppRepository constructor(
                 _error.postValue(e.message)
                 Timber.d(e)
             }
+        }
+    }
+
+    suspend fun getHistorical(date: String) {
+        withContext(Dispatchers.IO) {
+            try {
+                _isLoading.postValue(true)
+                val historicalResponse =
+                    FXMarketNetwork.fxMarketApi.getHistoricalAsync(date).await()
+
+                val historyToInsert = mutableListOf<DatabaseHistory?>()
+                if (historicalResponse.price.isNotEmpty()) {
+                    for ((key, value) in historicalResponse.price) {
+                        historyToInsert.add(
+                            _lastIndex.value?.let {
+                                DatabaseHistory(
+                                    currencyPair = key,
+                                    price = value,
+                                    date = historicalResponse.date
+                                )
+                            }
+                        )
+                    }
+                    if (historyToInsert.isNotEmpty()) {
+                        fxAppDao.insertAllHistory(*historyToInsert.toTypedArray())
+                    }
+                }
+                _isLoading.postValue(false)
+            } catch (e: Exception) {
+                _isLoading.postValue(false)
+                _error.postValue(e.message)
+                Timber.d(e)
+            }
+        }
+    }
+
+    suspend fun clearHistory() {
+        withContext(Dispatchers.IO) {
+            fxAppDao.deleteAllHistory()
         }
     }
 }

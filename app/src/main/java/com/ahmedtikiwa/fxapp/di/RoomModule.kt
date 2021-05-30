@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.ahmedtikiwa.fxapp.database.FXAppDao
 import com.ahmedtikiwa.fxapp.database.FXAppDatabase
+import com.ahmedtikiwa.fxapp.database.MIGRATION_1_2
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +20,7 @@ class RoomModule {
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): FXAppDatabase {
         return Room.databaseBuilder(context, FXAppDatabase::class.java, "fxapp")
+            .addMigrations(MIGRATION_1_2)
             .build()
     }
 

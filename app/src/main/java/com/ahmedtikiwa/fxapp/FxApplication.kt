@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
 import com.ahmedtikiwa.fxapp.work.RefreshCurrenciesWorker
+import com.ahmedtikiwa.fxapp.work.RefreshHistoryWorker
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,10 +49,20 @@ class FxApplication : Application(), Configuration.Provider {
                 .setConstraints(constraints)
                 .build()
 
+        val refreshHistoryWorker = PeriodicWorkRequestBuilder<RefreshHistoryWorker>(1, TimeUnit.DAYS)
+            .setConstraints(constraints)
+            .build()
+
         workManager.enqueueUniquePeriodicWork(
             RefreshCurrenciesWorker.WORK_NAME,
             ExistingPeriodicWorkPolicy.REPLACE,
             refreshCurrenciesRequest
+        )
+
+        workManager.enqueueUniquePeriodicWork(
+            RefreshHistoryWorker.WORK_NAME,
+            ExistingPeriodicWorkPolicy.REPLACE,
+            refreshHistoryWorker
         )
     }
 }

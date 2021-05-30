@@ -5,9 +5,10 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [
-        DatabaseCurrencies::class
+        DatabaseCurrencies::class,
+        DatabaseHistory::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 

@@ -2,6 +2,7 @@ package com.ahmedtikiwa.fxapp.network
 
 import com.ahmedtikiwa.fxapp.network.models.NetworkConvertResponse
 import com.ahmedtikiwa.fxapp.network.models.NetworkCurrenciesResponse
+import com.ahmedtikiwa.fxapp.network.models.NetworkHistoricalResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.ConnectionPool
@@ -24,6 +25,12 @@ interface FXMarketService {
         @Query("to") to: String,
         @Query("amount") amount: Int = 1,
     ): Deferred<NetworkConvertResponse>
+
+    @GET("apihistorical")
+    fun getHistoricalAsync(
+        @Query("date") date: String,
+        @Query("interval") interval: String = "daily"
+    ): Deferred<NetworkHistoricalResponse>
 }
 
 object FXMarketNetwork {
