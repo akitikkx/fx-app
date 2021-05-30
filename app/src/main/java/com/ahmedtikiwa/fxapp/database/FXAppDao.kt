@@ -22,5 +22,8 @@ interface FXAppDao {
     fun deleteAllHistory()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllHistory(vararg history: DatabaseHistory?)
+    fun insertAllHistory(vararg history: DatabaseHistory)
+
+    @Query("select * from history where currencyPair = :currencyPair ORDER BY date ASC")
+    fun getPagedCurrencyPairHistory(currencyPair: String): LiveData<List<DatabaseHistory>>
 }

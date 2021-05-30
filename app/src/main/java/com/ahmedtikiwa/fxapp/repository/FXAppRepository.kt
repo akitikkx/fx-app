@@ -9,6 +9,7 @@ import com.ahmedtikiwa.fxapp.database.FXAppDao
 import com.ahmedtikiwa.fxapp.database.asDomainModel
 import com.ahmedtikiwa.fxapp.domain.Conversion
 import com.ahmedtikiwa.fxapp.domain.Currency
+import com.ahmedtikiwa.fxapp.domain.History
 import com.ahmedtikiwa.fxapp.network.FXMarketNetwork
 import com.ahmedtikiwa.fxapp.network.models.asDomainModel
 import kotlinx.coroutines.Dispatchers
@@ -28,11 +29,14 @@ class FXAppRepository constructor(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    private var _lastIndex = MutableLiveData<Int>(1)
-
     val currencies: LiveData<List<Currency>> = Transformations.map(fxAppDao.getCurrencies()) {
         it.asDomainModel()
     }
+
+    fun currencyHistory(currencyPair: String): LiveData<List<History>> =
+        Transformations.map(fxAppDao.getPagedCurrencyPairHistory(currencyPair)) {
+            it.asDomainModel()
+        }
 
     suspend fun getConversion(from: String?, to: String?) {
         if (from.isNullOrBlank() || to.isNullOrBlank()) {
@@ -97,17 +101,15 @@ class FXAppRepository constructor(
                 val historicalResponse =
                     FXMarketNetwork.fxMarketApi.getHistoricalAsync(date).await()
 
-                val historyToInsert = mutableListOf<DatabaseHistory?>()
+                val historyToInsert = mutableListOf<DatabaseHistory>()
                 if (historicalResponse.price.isNotEmpty()) {
                     for ((key, value) in historicalResponse.price) {
                         historyToInsert.add(
-                            _lastIndex.value?.let {
-                                DatabaseHistory(
-                                    currencyPair = key,
-                                    price = value,
-                                    date = historicalResponse.date
-                                )
-                            }
+                            DatabaseHistory(
+                                currencyPair = key,
+                                price = value,
+                                date = historicalResponse.date
+                            )
                         )
                     }
                     if (historyToInsert.isNotEmpty()) {

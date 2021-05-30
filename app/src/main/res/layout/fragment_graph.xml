@@ -1,20 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.graph.GraphFragment">
+        android:fillViewport="true">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello graph" />
+            tools:context=".ui.graph.GraphFragment">
 
-    </FrameLayout>
+            <LinearLayout
+                android:id="@+id/layout_eurusd_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_double"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                    android:padding="@dimen/padding_double"
+                    android:text="@string/eurusd_graph_heading"
+                    android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                <com.jjoe64.graphview.GraphView
+                    android:id="@+id/eur_usd_graph"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_standard"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_gbpusd_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_eurusd_container">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_double"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                    android:padding="@dimen/padding_double"
+                    android:text="@string/gbpusd_graph_heading"
+                    android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                <com.jjoe64.graphview.GraphView
+                    android:id="@+id/gpb_usd_graph"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_standard"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_usdjpy_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_gbpusd_container">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_double"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                    android:padding="@dimen/padding_double"
+                    android:text="@string/usdjpy_graph_heading"
+                    android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                <com.jjoe64.graphview.GraphView
+                    android:id="@+id/usd_jpy_graph"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_standard"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </layout>

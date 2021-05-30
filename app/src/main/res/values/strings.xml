@@ -17,6 +17,11 @@
     <string name="conversion_response">1%1$s = %2$s%3$f</string>
     <string name="conversion_response_attribution">Data provided by FXMarket API</string>
 
+    <!-- Graph screen -->
+    <string name="eurusd_graph_heading">EUR/USD, past 30 days</string>
+    <string name="gbpusd_graph_heading">GBP/USD, past 30 days</string>
+    <string name="usdjpy_graph_heading">USD/JPY, past 30 days</string>
+
     <!-- Bottom navigation -->
     <string name="bottom_navigation_converter_title">Converter</string>
     <string name="bottom_navigation_history_title">History</string>
