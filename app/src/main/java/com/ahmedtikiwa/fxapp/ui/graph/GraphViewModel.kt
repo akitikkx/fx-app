@@ -1,6 +1,8 @@
 package com.ahmedtikiwa.fxapp.ui.graph
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.ahmedtikiwa.fxapp.repository.FXAppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -15,6 +17,8 @@ class GraphViewModel @Inject constructor(
     val gbpUsdHistory = repository.currencyHistory(GBPUSD_PAIR)
 
     val usdJpyHistory = repository.currencyHistory(USDJPY_PAIR)
+
+    val history = repository.getHistory().cachedIn(viewModelScope)
 
     companion object {
         const val EURUSD_PAIR = "EURUSD"

@@ -25,5 +25,8 @@ interface FXAppDao {
     fun insertAllHistory(vararg history: DatabaseHistory)
 
     @Query("select * from history where currencyPair = :currencyPair ORDER BY date ASC")
-    fun getPagedCurrencyPairHistory(currencyPair: String): LiveData<List<DatabaseHistory>>
+    fun getCurrencyPairHistory(currencyPair: String): LiveData<List<DatabaseHistory>>
+
+    @Query("select * from history")
+    fun getPagedHistory(): List<DatabaseHistory>
 }

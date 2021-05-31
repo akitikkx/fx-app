@@ -21,6 +21,12 @@
     <string name="eurusd_graph_heading">EUR/USD, past 30 days</string>
     <string name="gbpusd_graph_heading">GBP/USD, past 30 days</string>
     <string name="usdjpy_graph_heading">USD/JPY, past 30 days</string>
+    <string name="history_paging_heading">All currencies, past 30 days</string>
+
+    <!-- Messages -->
+    <string name="loading_general">Loading…</string>
+    <string name="load_state_retry_button">Retry</string>
+    <string name="load_state_error_default">There was an error loading the results: %1$s</string>
 
     <!-- Bottom navigation -->
     <string name="bottom_navigation_converter_title">Converter</string>

@@ -3,6 +3,8 @@ package com.ahmedtikiwa.fxapp.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.ahmedtikiwa.fxapp.database.DatabaseCurrencies
 import com.ahmedtikiwa.fxapp.database.DatabaseHistory
 import com.ahmedtikiwa.fxapp.database.FXAppDao
@@ -34,9 +36,17 @@ class FXAppRepository constructor(
     }
 
     fun currencyHistory(currencyPair: String): LiveData<List<History>> =
-        Transformations.map(fxAppDao.getPagedCurrencyPairHistory(currencyPair)) {
+        Transformations.map(fxAppDao.getCurrencyPairHistory(currencyPair)) {
             it.asDomainModel()
         }
+
+    fun getHistory() =
+        Pager(
+            config = PagingConfig(
+                pageSize = 10
+            ),
+            pagingSourceFactory = { HistoryPagingSource(fxAppDao) }
+        ).flow
 
     suspend fun getConversion(from: String?, to: String?) {
         if (from.isNullOrBlank() || to.isNullOrBlank()) {

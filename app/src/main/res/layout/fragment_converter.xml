@@ -21,6 +21,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:loadingVisibility="@{viewModel.isLoading}"
                 tools:context=".ui.converter.ConverterFragment">
 
                 <TextView
@@ -98,20 +99,6 @@
                     app:layout_constraintTop_toBottomOf="@id/text_input_base_currency_menu" />
 
                 <TextView
-                    android:id="@+id/text_view_response_heading"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_double"
-                    android:gravity="center_horizontal"
-                    android:textAllCaps="true"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/button_submit"
-                    app:showHideView="@{viewModel.conversion != null}"
-                    tools:text="FX Rate" />
-
-                <TextView
                     android:id="@+id/text_view_conversion_response"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -124,7 +111,7 @@
                     app:conversion="@{viewModel.conversion}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_view_response_heading"
+                    app:layout_constraintTop_toBottomOf="@id/button_submit"
                     tools:text="$1 = R14.89" />
 
                 <TextView
