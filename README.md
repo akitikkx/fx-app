@@ -6,7 +6,7 @@
  
  ### Pre-requisites
  Before running app, you will need to acquire a FX Market API key from https://fxmarketapi.com/ and add this to the
- gradle.properties file:
+ `gradle.properties` file:
  
  ```
  FxMarketApiKey=""
@@ -26,11 +26,10 @@
  data for the past thirty days, thirty separate requests are performed by the `RefreshHistoryWorker`, and 
  on app load this is noticeable.
  
- - Paging 3 is used on the graph screen below the graphs to display all the historical data retrieved from
+ - `Paging 3` is used on the graph screen below the graphs to display all the historical data retrieved from
   FX Market API and cached for the default currencies.
   
- - The Android GraphView has a significant impact on the UI especially in conjunction with Paging 3. This
- is noticeable most especially on emulator devices on the graph screen.
+ - The Android GraphView library https://github.com/jjoe64/GraphView used in this project has a significant impact on the UI especially in conjunction with Paging 3. This is noticeable most especially on emulator devices on the graph screen with delayed rendering.
  
  ## Architecture
  `FX APP` is built using Kotlin and the following Jetpack components:
