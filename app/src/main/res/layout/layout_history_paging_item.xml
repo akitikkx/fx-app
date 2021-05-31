@@ -10,48 +10,40 @@
             type="com.ahmedtikiwa.fxapp.database.DatabaseHistory" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
 
         <TextView
             android:id="@+id/text_view_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:padding="@dimen/padding_standard"
             android:text="@{item.date}"
-            app:layout_constraintEnd_toStartOf="@id/text_view_currency"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="Date" />
 
         <TextView
             android:id="@+id/text_view_currency"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:padding="@dimen/padding_standard"
             android:text="@{item.currencyPair}"
-            app:layout_constraintEnd_toStartOf="@id/text_view_price"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@id/text_view_date"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="Currency" />
 
         <TextView
             android:id="@+id/text_view_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:padding="@dimen/padding_standard"
             app:itemPrice="@{item.price}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@id/text_view_currency"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="Price" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>
