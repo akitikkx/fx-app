@@ -4,7 +4,7 @@
  FX rate for two currency values as well as view through graphs, the past thirty-day history for FX Market API's
  default currency pairs - EURUSD, GBPUSD, and USDJPY as well as a paged list of the same historical data.
  
- ### Pre-requisites
+ ## Pre-requisites
  Before running app, you will need to acquire a FX Market API key from https://fxmarketapi.com/ and add this to the
  `gradle.properties` file:
  
@@ -15,7 +15,7 @@
  Without this key, the app will output errors as it will not be able to connect to FX Market API and retrieve the
  historical data as well as the current FX rate when requested from the converter screen.
  
- ### Things to note
+ ## Things to note
  The FX APP uses `WorkManager` to schedule two tasks and these are setup on app load: 
  
  - The list of currency pairs supported by FX Market API. These are cached into the Room database and retrieved 
