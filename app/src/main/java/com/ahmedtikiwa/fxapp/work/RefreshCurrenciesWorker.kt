@@ -25,6 +25,9 @@ class RefreshCurrenciesWorker @AssistedInject constructor(
         }
     }
 
+    /**
+     * Refresh the saved list of currently supported currencies
+     */
     private suspend fun refreshCurrencies(repository: FXAppRepository) {
         repository.refreshCurrencies()
     }

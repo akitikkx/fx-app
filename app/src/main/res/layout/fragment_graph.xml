@@ -5,130 +5,149 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.ahmedtikiwa.fxapp.ui.graph.GraphViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.graph.GraphFragment">
+            android:fillViewport="true">
 
-            <LinearLayout
-                android:id="@+id/layout_eurusd_container"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent"
+                app:loadingVisibility="@{viewModel.isLoading}"
+                tools:context=".ui.graph.GraphFragment">
+
+                <LinearLayout
+                    android:id="@+id/layout_eurusd_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_horizontal_standard"
+                        android:layout_marginTop="@dimen/margin_vertical_double"
+                        android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                        android:padding="@dimen/padding_double"
+                        android:text="@string/eurusd_graph_heading"
+                        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                    <com.jjoe64.graphview.GraphView
+                        android:id="@+id/eur_usd_graph"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/graph_height"
+                        android:layout_marginStart="@dimen/margin_horizontal_standard"
+                        android:layout_marginTop="@dimen/margin_vertical_standard"
+                        android:layout_marginEnd="@dimen/margin_horizontal_standard" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_gbpusd_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_eurusd_container">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_horizontal_standard"
+                        android:layout_marginTop="@dimen/margin_vertical_double"
+                        android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                        android:padding="@dimen/padding_double"
+                        android:text="@string/gbpusd_graph_heading"
+                        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                    <com.jjoe64.graphview.GraphView
+                        android:id="@+id/gpb_usd_graph"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/graph_height"
+                        android:layout_marginStart="@dimen/margin_horizontal_standard"
+                        android:layout_marginTop="@dimen/margin_vertical_standard"
+                        android:layout_marginEnd="@dimen/margin_horizontal_standard" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_usdjpy_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_gbpusd_container">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_horizontal_standard"
+                        android:layout_marginTop="@dimen/margin_vertical_double"
+                        android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                        android:padding="@dimen/padding_double"
+                        android:text="@string/usdjpy_graph_heading"
+                        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                    <com.jjoe64.graphview.GraphView
+                        android:id="@+id/usd_jpy_graph"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/graph_height"
+                        android:layout_marginStart="@dimen/margin_horizontal_standard"
+                        android:layout_marginTop="@dimen/margin_vertical_standard"
+                        android:layout_marginEnd="@dimen/margin_horizontal_standard" />
+                </LinearLayout>
 
                 <TextView
+                    android:id="@+id/text_view_history_heading"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_horizontal_standard"
+                    android:layout_marginTop="@dimen/margin_vertical_standard"
+                    android:layout_marginEnd="@dimen/margin_horizontal_standard"
+                    android:padding="@dimen/padding_double"
+                    android:text="@string/history_paging_heading"
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_usdjpy_container" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_history"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_horizontal_standard"
                     android:layout_marginTop="@dimen/margin_vertical_double"
                     android:layout_marginEnd="@dimen/margin_horizontal_standard"
-                    android:padding="@dimen/padding_double"
-                    android:text="@string/eurusd_graph_heading"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
+                    android:paddingBottom="@dimen/margin_vertical_standard"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_history_heading" />
 
-                <com.jjoe64.graphview.GraphView
-                    android:id="@+id/eur_usd_graph"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="@dimen/margin_horizontal_standard"
-                    android:layout_marginTop="@dimen/margin_vertical_standard"
-                    android:layout_marginEnd="@dimen/margin_horizontal_standard" />
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
-            <LinearLayout
-                android:id="@+id/layout_gbpusd_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_eurusd_container">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_horizontal_standard"
-                    android:layout_marginTop="@dimen/margin_vertical_double"
-                    android:layout_marginEnd="@dimen/margin_horizontal_standard"
-                    android:padding="@dimen/padding_double"
-                    android:text="@string/gbpusd_graph_heading"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
-
-                <com.jjoe64.graphview.GraphView
-                    android:id="@+id/gpb_usd_graph"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="@dimen/margin_horizontal_standard"
-                    android:layout_marginTop="@dimen/margin_vertical_standard"
-                    android:layout_marginEnd="@dimen/margin_horizontal_standard" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_usdjpy_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_gbpusd_container">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_horizontal_standard"
-                    android:layout_marginTop="@dimen/margin_vertical_double"
-                    android:layout_marginEnd="@dimen/margin_horizontal_standard"
-                    android:padding="@dimen/padding_double"
-                    android:text="@string/usdjpy_graph_heading"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
-
-                <com.jjoe64.graphview.GraphView
-                    android:id="@+id/usd_jpy_graph"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="@dimen/margin_horizontal_standard"
-                    android:layout_marginTop="@dimen/margin_vertical_standard"
-                    android:layout_marginEnd="@dimen/margin_horizontal_standard" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/text_view_history_heading"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_horizontal_standard"
-                android:layout_marginTop="@dimen/margin_vertical_standard"
-                android:layout_marginEnd="@dimen/margin_horizontal_standard"
-                android:padding="@dimen/padding_double"
-                android:text="@string/history_paging_heading"
-                android:textAppearance="?attr/textAppearanceHeadline5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_usdjpy_container" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_horizontal_standard"
-                android:layout_marginTop="@dimen/margin_vertical_double"
-                android:layout_marginEnd="@dimen/margin_horizontal_standard"
-                android:paddingBottom="@dimen/margin_vertical_standard"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_history_heading" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showHideView="@{viewModel.isLoading}"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -49,6 +49,9 @@ class FXAppRepository constructor(
             pagingSourceFactory = { HistoryPagingSource(fxAppDao) }
         ).flow
 
+    /**
+     * Get the current FX Rate for the given currencies
+     */
     suspend fun getConversion(from: String?, to: String?) {
         if (from.isNullOrBlank() || to.isNullOrBlank()) {
             return
@@ -68,6 +71,9 @@ class FXAppRepository constructor(
         }
     }
 
+    /**
+     * Store the currently supported list of currencies from FX Market API
+     */
     suspend fun refreshCurrencies() {
         withContext(Dispatchers.IO) {
             try {
@@ -105,6 +111,11 @@ class FXAppRepository constructor(
         }
     }
 
+    /**
+     * Get the historical information for currencies pairs for a given date
+     * Note: this only returns 3 currency pairs at a time and for a single date
+     * and not a date range
+     */
     suspend fun getHistorical(date: String) {
         withContext(Dispatchers.IO) {
             try {
@@ -136,6 +147,10 @@ class FXAppRepository constructor(
         }
     }
 
+    /**
+     * Clear the currently saved history to be replaced with new historical data
+     * This function is called by workManager
+     */
     suspend fun clearHistory() {
         withContext(Dispatchers.IO) {
             fxAppDao.deleteAllHistory()

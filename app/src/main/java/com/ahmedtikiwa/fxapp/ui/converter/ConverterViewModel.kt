@@ -44,14 +44,24 @@ class ConverterViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Handle the click of the button
+     */
     fun onGetRateButtonClick() {
         _rateRequested.postValue(true)
     }
 
+    /**
+     * Mark the current FX rate request as complete
+     */
     fun onRateRequestCompleted() {
         _rateRequested.postValue(false)
     }
 
+    /**
+     * Perform a request to the repository for the current FX rate
+     * once the correct values have been retrieved from the form
+     */
     fun onRateQueryReceived(from: String, to: String) {
         savedStateHandle.set(FROM_CURRENCY, from)
         savedStateHandle.set(TO_CURRENCY, to)

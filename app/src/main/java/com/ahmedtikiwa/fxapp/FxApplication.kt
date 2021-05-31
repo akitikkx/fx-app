@@ -36,6 +36,9 @@ class FxApplication : Application(), Configuration.Provider {
         }
     }
 
+    /**
+     * Schedule the background tasks
+     */
     private fun launchBackgroundTasks() {
         val constraints = Constraints.Builder()
             .setRequiresBatteryNotLow(true)
@@ -44,11 +47,13 @@ class FxApplication : Application(), Configuration.Provider {
 
         val workManager = WorkManager.getInstance(this)
 
+        // get the currently supported list of currencies only once a week
         val refreshCurrenciesRequest =
             PeriodicWorkRequestBuilder<RefreshCurrenciesWorker>(7, TimeUnit.DAYS)
                 .setConstraints(constraints)
                 .build()
 
+        // Get the latest historical information every day
         val refreshHistoryWorker = PeriodicWorkRequestBuilder<RefreshHistoryWorker>(1, TimeUnit.DAYS)
             .setConstraints(constraints)
             .build()

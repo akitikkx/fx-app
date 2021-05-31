@@ -20,6 +20,8 @@ class GraphViewModel @Inject constructor(
 
     val history = repository.getHistory().cachedIn(viewModelScope)
 
+    val isLoading = repository.isLoading
+
     companion object {
         const val EURUSD_PAIR = "EURUSD"
         const val GBPUSD_PAIR = "GBPUSD"

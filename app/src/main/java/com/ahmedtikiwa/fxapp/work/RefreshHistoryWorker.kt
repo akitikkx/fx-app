@@ -26,6 +26,12 @@ class RefreshHistoryWorker @AssistedInject constructor(
         }
     }
 
+    /**
+     * Refreshes the cached historical data. Note that since the endpoint
+     * only caters for one date at a time, the request will run through
+     * all the different dates one at a time as the endpoint does not provide
+     * data for a specified range but rather a specified date
+     */
     private suspend fun refreshHistory(repository: FXAppRepository) {
         val previousThirtyDays = DateUtil.getPastThirtyDateExclWeekends()
         if (previousThirtyDays.isNotEmpty()) {

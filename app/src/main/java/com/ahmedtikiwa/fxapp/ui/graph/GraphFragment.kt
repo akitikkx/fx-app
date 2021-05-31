@@ -91,6 +91,9 @@ class GraphFragment : Fragment() {
         }
     }
 
+    /**
+     * Add the information for the graph to be displayed
+     */
     private fun addGraphData(graphView: GraphView, data: List<History>) {
         if (data.isNotEmpty()) {
             val series: LineGraphSeries<DataPoint>
@@ -108,6 +111,13 @@ class GraphFragment : Fragment() {
             series = LineGraphSeries(
                 dataPoints.toTypedArray()
             )
+
+            graphView.gridLabelRenderer.verticalAxisTitle =
+                getString(R.string.graph_vertical_axis_title)
+            graphView.gridLabelRenderer.horizontalAxisTitle =
+                getString(R.string.graph_horizontal_axis_title)
+            // the renderer does not display the date values correctly
+            graphView.gridLabelRenderer.isHorizontalLabelsVisible = false
 
             graphView.addSeries(series)
         }
