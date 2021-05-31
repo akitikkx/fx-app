@@ -1,5 +1,8 @@
 # FX App
 
+## Screenshots
+<img src="https://github.com/akitikkx/fx-app/blob/main/screenshots/fxapp_web_banner.png">
+
 ## License
 
 MIT License
